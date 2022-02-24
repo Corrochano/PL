@@ -6,7 +6,7 @@ package alex;
 
 
 // See https://github.com/jflex-de/jflex/issues/222
-@SuppressWarnings("FallThrough")
+@SuppressWarnings("fallthrough")
 class AnalizadorLexicoTiny {
 
   /** This character denotes the end of file. */

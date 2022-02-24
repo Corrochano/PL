@@ -234,7 +234,9 @@ public class ALexOperations {
       return new UnidadLexicaUnivaluada(alex.fila(), alex.columna(),ClaseLexica.MENOS); 
    }
 
-
+   public UnidadLexica unidadEof() {
+	     return new UnidadLexicaUnivaluada(alex.fila(), alex.columna(),ClaseLexica.EOF); 
+   }
 
    public void error() {
       System.err.println("***"+alex.fila()+" Caracter inexperado: "+alex.lexema());
