@@ -27,7 +27,7 @@ digitoPositivo = [1-9]
 digito = ({digitoPositivo}|0)
 signo = \+|\-
 
-parteDecimal = ({{digito}* {digitoPositivo}}|0)
+parteDecimal = ({digito}* {digitoPositivo}|0)
 parteExponencial = (e|E)numeroEntero
 
 separador = [ \t\r\b\n]
@@ -35,14 +35,14 @@ comentario = #[^\n]*
 
 identificador = {letra}({letra}|{digito})*
 real = ent\.{parteDecimal} {parteExponencial}
-ent = ([signo]?{digitoPositivo {digito}*}|0)
+ent = ([signo]?(digitoPositivo {digito}*)|0)
 cadena = \" [^\"\n\b\r]* \"
 bool = (true|false)
 
 mas = \+
 menos = \-
 por = \*+
-div = /
+div = \/
 
 igual = \=
 coma  = \,
