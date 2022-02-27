@@ -31,7 +31,7 @@ parteExponencial = [e|E]{ent}
 
 identificador = {letra}({letra}|{digito}|_)*
 ent = ([\+|\-]?({digitoPositivo}{digito}*)|0)
-real = {ent}((\.{parteDecimal}+{parteExponencial})+(\.{parteDecimal}{parteExponencial}))
+real = {ent}((\.{parteDecimal}|{parteExponencial})|(\.{parteDecimal}{parteExponencial}))
 cadena = \"[^\"|\n|\b|\r]*\"
 comentario = #[^\n]*
 
@@ -59,7 +59,7 @@ while = while
 do = do
 endwhile = endwhile
 call = call
-record = trecord
+record = record
 of = of
 new = new
 delete = delete
