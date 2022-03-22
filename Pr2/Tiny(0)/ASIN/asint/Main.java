@@ -11,6 +11,7 @@ public class Main {
      Reader input = new InputStreamReader(new FileInputStream(args[0]));
      AnalizadorSintacticoTiny asint = new AnalizadorSintacticoTiny(input);
      asint.Sp();
+     System.out.println("OK");
  }
 }   
    

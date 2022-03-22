@@ -57,6 +57,7 @@ public class AnalizadorSintacticoTiny {
    public void D0_1(){
       switch(anticipo.clase()){
          case PUNTOCOMA: 
+            empareja(ClaseLexica.PUNTOCOMA);
             D1();
             D0_1();
             break;
@@ -94,6 +95,7 @@ public class AnalizadorSintacticoTiny {
    public void A0_1(){
       switch(anticipo.clase()){
          case PUNTOCOMA: 
+         empareja(ClaseLexica.PUNTOCOMA);
             A1();
             A0_1();
             break;
@@ -131,12 +133,13 @@ public class AnalizadorSintacticoTiny {
          case ENT:
          case IDEN:
          case BOOL:
+         case PAP:
             E1();
             E0_1();
             break;
          default: errores.errorSintactico(anticipo.fila(), anticipo.columna(), anticipo.clase(), ClaseLexica.MAS, ClaseLexica.MENOS, ClaseLexica.AND, ClaseLexica.OR, 
                                           ClaseLexica.MENOR, ClaseLexica.MENORI, ClaseLexica.MAYOR, ClaseLexica.MAYORI, ClaseLexica.IGIG, ClaseLexica.NOIG,
-                                          ClaseLexica.NOT, ClaseLexica.DIV, ClaseLexica.POR, ClaseLexica.REAL, ClaseLexica.ENT, ClaseLexica.IDEN, ClaseLexica.BOOL);
+                                          ClaseLexica.NOT, ClaseLexica.DIV, ClaseLexica.POR, ClaseLexica.REAL, ClaseLexica.ENT, ClaseLexica.IDEN, ClaseLexica.BOOL, ClaseLexica.PAP);
       }
    }
    public void E0_1(){
@@ -151,8 +154,10 @@ public class AnalizadorSintacticoTiny {
             break;
          case PUNTOCOMA:
          case EOF:
+         case PCIERRE:
             break;
-         default: errores.errorSintactico(anticipo.fila(), anticipo.columna(), anticipo.clase(), ClaseLexica.MAS, ClaseLexica.MENOS, ClaseLexica.PUNTOCOMA, ClaseLexica.EOF);
+         default: errores.errorSintactico(anticipo.fila(), anticipo.columna(), anticipo.clase(), ClaseLexica.MAS, ClaseLexica.MENOS, ClaseLexica.PUNTOCOMA, ClaseLexica.EOF, 
+                                          ClaseLexica.PCIERRE);
       }
    }
    public void E1(){
@@ -172,12 +177,14 @@ public class AnalizadorSintacticoTiny {
          case ENT:
          case IDEN:
          case BOOL:
+         case PAP:
             E2();
             E1_1();
             break;
             default: errores.errorSintactico(anticipo.fila(), anticipo.columna(), anticipo.clase(), ClaseLexica.AND, ClaseLexica.OR, 
             ClaseLexica.MENOR, ClaseLexica.MENORI, ClaseLexica.MAYOR, ClaseLexica.MAYORI, ClaseLexica.IGIG, ClaseLexica.NOIG,
-            ClaseLexica.NOT, ClaseLexica.DIV, ClaseLexica.POR, ClaseLexica.REAL, ClaseLexica.ENT, ClaseLexica.IDEN, ClaseLexica.BOOL);
+            ClaseLexica.NOT, ClaseLexica.DIV, ClaseLexica.POR, ClaseLexica.REAL, ClaseLexica.ENT, ClaseLexica.IDEN, ClaseLexica.BOOL, 
+            ClaseLexica.PAP);
       }
    }
    public void E1_1(){
@@ -187,9 +194,11 @@ public class AnalizadorSintacticoTiny {
          case MAS:
          case MENOS:
          case PUNTOCOMA:
+         case PCIERRE:
+         case EOF:
          break;
          default: errores.errorSintactico(anticipo.fila(), anticipo.columna(), anticipo.clase(), ClaseLexica.AND, ClaseLexica.OR, ClaseLexica.MAS, ClaseLexica.MENOS, 
-                                          ClaseLexica.PUNTOCOMA);
+                                          ClaseLexica.PUNTOCOMA, ClaseLexica.PCIERRE);
       }
    }
    public void E2(){
@@ -208,12 +217,13 @@ public class AnalizadorSintacticoTiny {
          case ENT:
          case IDEN:
          case BOOL:
+         case PAP:
             E3();
             E2_1();
          break;
          default: errores.errorSintactico(anticipo.fila(), anticipo.columna(), anticipo.clase(), ClaseLexica.MENOR, ClaseLexica.MENORI, ClaseLexica.MAYOR, ClaseLexica.MAYORI, 
                                           ClaseLexica.IGIG, ClaseLexica.NOIG, ClaseLexica.MENOS, ClaseLexica.NOT, ClaseLexica.DIV, ClaseLexica.POR, ClaseLexica.REAL, 
-                                          ClaseLexica.ENT, ClaseLexica.IDEN, ClaseLexica.BOOL);
+                                          ClaseLexica.ENT, ClaseLexica.IDEN, ClaseLexica.BOOL, ClaseLexica.PAP);
       }
    }
    public void E2_1(){
@@ -229,9 +239,12 @@ public class AnalizadorSintacticoTiny {
          case AND:
          case OR:
          case PUNTOCOMA:
+         case PCIERRE:
+         case EOF:
           break;
          default: errores.errorSintactico(anticipo.fila(), anticipo.columna(), anticipo.clase(), ClaseLexica.MENOR, ClaseLexica.MENORI, ClaseLexica.MAYOR, ClaseLexica.MAYORI, 
-                                          ClaseLexica.IGIG, ClaseLexica.NOIG, ClaseLexica.MAS, ClaseLexica.MENOS, ClaseLexica.AND, ClaseLexica.OR, ClaseLexica.PUNTOCOMA);
+                                          ClaseLexica.IGIG, ClaseLexica.NOIG, ClaseLexica.MAS, ClaseLexica.MENOS, ClaseLexica.AND, ClaseLexica.OR, ClaseLexica.PUNTOCOMA, 
+                                          ClaseLexica.PCIERRE);
       }
    }
    public void E3(){
@@ -243,11 +256,12 @@ public class AnalizadorSintacticoTiny {
          case ENT:
          case IDEN:
          case BOOL:
+         case PAP:
             E4();
             E3_0();
          break;
          default: errores.errorSintactico(anticipo.fila(), anticipo.columna(), anticipo.clase(), ClaseLexica.MENOS, ClaseLexica.NOT, ClaseLexica.POR, ClaseLexica.REAL, 
-                                          ClaseLexica.ENT, ClaseLexica.IDEN, ClaseLexica.BOOL);
+                                          ClaseLexica.ENT, ClaseLexica.IDEN, ClaseLexica.BOOL, ClaseLexica.PAP);
       }
    }
    public void E3_0(){
@@ -265,17 +279,26 @@ public class AnalizadorSintacticoTiny {
          case MAS:
          case MENOS:
          case PUNTOCOMA:
+         case PCIERRE:
+         case EOF:
          break;
          
          default: errores.errorSintactico(anticipo.fila(), anticipo.columna(), anticipo.clase(), ClaseLexica.DIV, ClaseLexica.POR, ClaseLexica.MENOR, ClaseLexica.MENORI, 
                                           ClaseLexica.MAYOR, ClaseLexica.MAYORI, ClaseLexica.IGIG, ClaseLexica.NOIG, ClaseLexica.AND, ClaseLexica.OR, ClaseLexica.MAS, 
-                                          ClaseLexica.MENOS, ClaseLexica.PUNTOCOMA);
+                                          ClaseLexica.MENOS, ClaseLexica.PUNTOCOMA, ClaseLexica.PCIERRE);
       }
    }
    public void E4(){
       switch(anticipo.clase()){
          case MENOS: empareja(ClaseLexica.MENOS); E5(); break;
          case NOT: empareja(ClaseLexica.NOT); E4(); break;
+         case PAP: 
+         case ENT:
+         case REAL:
+         case BOOL:
+         case IDEN:
+            E5(); 
+            break;
          default: errores.errorSintactico(anticipo.fila(), anticipo.columna(), anticipo.clase(), ClaseLexica.MENOS, ClaseLexica.NOT);
       }
    }
