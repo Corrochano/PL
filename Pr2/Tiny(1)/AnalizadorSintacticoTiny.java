@@ -780,8 +780,7 @@ public class AnalizadorSintacticoTiny implements AnalizadorSintacticoTinyConstan
       }
     default:
       jj_la1[20] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
+
     }
 }
 

@@ -108,7 +108,7 @@ void Fcall()            : {} { <ident> Fident()  }
 void Fident()           : {} { "(" Fpap()  }
 void Fpap()             : {} { PR0() ")" | ")"  }
 void PR0()              : {} { PR1() PR0_1()  }
-void PR0_1()            : {} { "," PR1() PR0_1() | PR1() "->" E0()  }
+void PR0_1()            : {} { "," PR1() PR0_1() | PR1() "->" E0() | {} }
 void PR1()              : {} { E0() }
 void IC0()              : {} { B0()  }
 void E0()               : {} { E1() FE1() }
