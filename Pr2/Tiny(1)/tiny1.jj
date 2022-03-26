@@ -61,7 +61,7 @@ void D1()               : {} { DV0() | DT0() | DP0() }
 void DV0()              : {} { <var> T0() <ident> }
 void DT0()              : {} { <type> T0() <ident> }
 void DP0()              : {} { <proc> <ident> "(" PFS0() ")" B0() }
-void PFS0()             : {} { PF1() PFS0_1() }
+void PFS0()             : {} { PF1() PFS0_1() | {}}
 void PFS0_1()           : {} { "," PF1() PFS0_1() | {}}
 void PF1()              : {} { T0() FT0() }
 void FT0()              : {} { <ident> | "&" <ident> }
