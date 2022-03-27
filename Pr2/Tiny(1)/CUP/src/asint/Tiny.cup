@@ -1,0 +1,77 @@
+package asint;
+
+import java_cup.runtime.*;
+import alex.AnalizadorLexicoTiny;
+import alex.UnidadLexica;
+import errors.GestionErroresTiny;
+
+scan with {: return getScanner().next_token(); :};
+parser code {: 
+   private GestionErroresTiny errores;
+   public void syntax_error(Symbol unidadLexica) {
+     errores.errorSintactico((UnidadLexica)unidadLexica);
+   }
+:};
+init with {: 
+   errores = new GestionErroresTiny();
+   AnalizadorLexicoTiny alex = (AnalizadorLexicoTiny)getScanner();
+:};
+
+
+terminal     NUMENT, BOOL, NUMREAL, PCOMA, UNIDADBOOL, 
+			 IGUAL, MAS, MENOS, POR, DIV, AND, OR, NOT,
+			 MAYOR, MENOR, MAYORIGUAL, MENORIGUAL, EQUIV, NOEQUIV,
+			 NEG, PAP, PCIERRE, SEPARADOR, VAR, IDENT, TYPE, PROC, COMA,
+			 AMP, LAP, LCIERRE, CAP, CCIERRE, INT, REAL, STRING, OF, NULL, 
+			 ARRAY, RECORD, POINTER, IF, ELSE, THEN, ENDIF, WHILE, DO,
+			 ENDWHILE, READ, WRITE, NL, NEW, DELETE, CALL, FLECHA, MODULO,
+			 PUNTO, INDIRECCION, CADENA;
+
+non terminal  S, D0, D1, DV0, DT0, DP0, PFS0, PF1, TB0, TA0, TR0, C0, C1, TP0, T0, I1, IA0, IIT0, IITE0, IW0, I0, IL0, IE0, INL0, IRM0, ILM0, IIP0,
+				PR0, PR1, IC0, B0, E1, E2, E3, E4, E5, E6, E7, E0;
+
+	S ::= D0 SEPARADOR I0 | I0 ;
+	D0 ::= D0 PCOMA D1 | D1 ;
+	D1 ::= DV0 | DT0 | DP0 ;
+	DV0 ::= VAR T0 IDENT ;
+	DT0 ::= TYPE T0 IDENT ;
+	DP0 ::= PROC IDENT PAP PFS0 PCIERRE B0 | PROC IDENT  PAP PCIERRE B0 ;
+	PFS0 ::= PFS0 COMA PF1 | PF1 ;
+	PF1 ::= T0 IDENT | T0 AMP IDENT ;
+	B0 ::= LAP S LCIERRE | LAP LCIERRE ;
+	T0 ::= TB0 | IDENT | TA0 | TR0 | TP0 ;
+	TB0 ::= INT | REAL | BOOL | STRING ;
+	TA0 ::= ARRAY CAP NUMENT CCIERRE OF T0 ;
+	TR0 ::= RECORD LAP C0 LCIERRE ;
+	C0 ::= C0 PCOMA C1 | C1 ;
+	C1 ::= T0 IDENT ;
+	TP0 ::= POINTER T0 ;
+	I0 ::= I0 PCOMA I1 | I1 ;
+	I1 ::= IA0 | IIT0 | IITE0 | IW0 | IL0 | IE0 | INL0 | IRM0 | ILM0 | IIP0 | IC0 ;
+	IA0 ::= E0 IGUAL E0 ;
+	IIT0 ::= IF E0 THEN ENDIF | IF E0 THEN I0 ENDIF ;
+	IITE0 ::= IF E0 THEN ELSE ENDIF | IF E0 THEN I0 ELSE ENDIF | IF E0 THEN ELSE I0 ENDIF | IF E0 THEN I0 ELSE I0 ENDIF ;
+	IW0 ::= WHILE E0 DO ENDWHILE | WHILE E0 DO I0 ENDWHILE ;
+	IL0 ::= READ E0 ;
+	IE0 ::= WRITE E0 ;
+	INL0 ::= NL ;
+	IRM0 ::= NEW E0 ;
+	ILM0 ::= DELETE E0 ;
+	IIP0 ::= CALL IDENT PAP PR0 PCIERRE | CALL IDENT PAP PCIERRE ;
+	PR0 ::= PR0 COMA PR1 | PR1 ;
+	PR1 ::= E0 ;
+	IC0 ::= B0 ;
+
+	E0 ::= E1 MAS E0 | E1 MENOS E1 | E1 ;
+	E1 ::= E1 AND E2 | E1 OR E2 | E2 ;
+	E2 ::= E2 MENOR E3 | E2 MENORIGUAL E3 | E2 MAYOR E3 | E2 MAYORIGUAL E3 | E2 EQUIV E3 | E2 NOEQUIV E3 | E3 ;
+	E3 ::= E4 DIV E4 | E4 POR E4 | E4 MODULO E4 | E4 ;
+	E4 ::= NEG E5 | NOT E4 | E5 ;
+	E5 ::= E5 CAP E0 CCIERRE | E5 PUNTO IDENT | E5 FLECHA IDENT | E6 ;
+	E6 ::= E6 INDIRECCION | E7 ;
+	E7 ::= NUMREAL | NUMENT | CADENA | IDENT | UNIDADBOOL | NULL | PAP E0 PCIERRE ;
+
+
+
+
+
