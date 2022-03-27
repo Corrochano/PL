@@ -50,6 +50,7 @@ PARSER_END(AnalizadorSintacticoTiny)
   TOKEN: {<not:"not">}
   TOKEN: {<ttrue:"true">}
   TOKEN: {<ffalse:"false">}
+  TOKEN: {<nnull:"null">}
 
   TOKEN:{<ident:<letra>(<letra>|<digito>|"_")*>}
   
@@ -124,6 +125,6 @@ void E5()               : {} { E6() E5_1()  }
 void E5_1()             : {} { "[" E0() "]" E5_1() | "." <ident> E5_1() | "->" <ident> E5_1() | {}}
 void E6()               : {} { E7() E6_1()  }
 void E6_1()             : {} { "*" E6_1() | {}}
-void E7()               : {} { <numReal>  | <numEnt> | <cadena> | <ident> | <ttrue> | <ffalse> | "(" E0() ")" }
+void E7()               : {} { <numReal>  | <numEnt> | <cadena> | <ident> | <ttrue> | <ffalse> | <nnull> | "(" E0() ")" }
   
   

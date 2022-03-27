@@ -87,7 +87,9 @@ public interface AnalizadorSintacticoTinyConstants {
   /** RegularExpression Id. */
   int ffalse = 40;
   /** RegularExpression Id. */
-  int ident = 41;
+  int nnull = 41;
+  /** RegularExpression Id. */
+  int ident = 42;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -135,6 +137,7 @@ public interface AnalizadorSintacticoTinyConstants {
     "\"not\"",
     "\"true\"",
     "\"false\"",
+    "\"null\"",
     "<ident>",
     "\"&&\"",
     "\";\"",
