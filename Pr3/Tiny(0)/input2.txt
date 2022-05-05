@@ -1,0 +1,13 @@
+ real base;
+ real altura;
+ bool cosa;
+ int rosa;
+ bool rojo
+ &&
+ base = (47.0 / 12e-56) + +24.005;
+ cosa = true;
+ rosa = 0;
+ altura = 2.0 - 1.0;
+ altura = base + altura;
+ cosa = cosa or true;
+ rojo = rosa <= 0

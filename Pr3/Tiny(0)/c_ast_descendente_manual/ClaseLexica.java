@@ -1,0 +1,7 @@
+package c_ast_descendente_manual;
+
+public enum ClaseLexica {
+ IDEN, ENT, REAL, BOOL, TENT, TREAL, TBOOL, PAP, PCIERRE, IGUAL, 
+ MAS, MENOS, POR, DIV, MENOR, MAYOR, MENORI, MAYORI, IGIG, NOIG, EOF, 
+ OR, NOT, AND, SEPARADOR, PUNTOCOMA
+}
